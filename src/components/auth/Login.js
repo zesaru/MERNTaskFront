@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const onChange = e => {};
+  //State para iniciar sesion
+  const [usuario, guardarUsuario] = useState({
+    email: "",
+    password: ""
+  });
+
+  // extraer de usuario
+  const { email, password } = usuario;
+
+  const onChange = e => {
+    guardarUsuario({
+      ...usuario,
+      [e.target.name]: e.target.value
+    });
+  };
 
   return (
     <div className="form-usuario">
@@ -16,6 +31,7 @@ const Login = () => {
               id="email"
               name="email"
               placeholder="Tu Email"
+              email={email}
               onChange={onChange}
             />
           </div>
@@ -27,6 +43,7 @@ const Login = () => {
               id="password"
               name="password"
               placeholder="Tu Password"
+              password={password}
               onChange={onChange}
             />
           </div>
@@ -38,6 +55,10 @@ const Login = () => {
               value="Iniciar Sesión"
             />
           </div>
+
+          <Link to={"/nueva-cuenta"} className="enlace-cuenta">
+            Obtener Cuenta
+          </Link>
         </form>
       </div>
     </div>

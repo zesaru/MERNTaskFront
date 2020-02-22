@@ -1,17 +1,12 @@
 import React from "react";
-import Sidebar from "../layout/SideBar";
 
-const Proyecto = () => {
+const Proyecto = ({ proyecto }) => {
   return (
-    <div className="contenedor-app">
-      <Sidebar />
-
-      <div className="seccion-principal">
-        <main>
-          <div className="contenedor-tareas"></div>
-        </main>
-      </div>
-    </div>
+    <li>
+      <button type="button" className="btn btn-blank">
+        {proyecto.nombre}
+      </button>
+    </li>
   );
 };
 

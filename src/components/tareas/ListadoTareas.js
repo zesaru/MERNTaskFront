@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Tarea from "./Tarea";
 
 const ListadoTareas = () => {
@@ -10,7 +10,7 @@ const ListadoTareas = () => {
   ];
 
   return (
-    <Fragment>
+    <>
       <h2>Proyecto: Tienda Virtual</h2>
 
       <ul className="listado-tareas">
@@ -22,7 +22,10 @@ const ListadoTareas = () => {
           tareasProyecto.map(tarea => <Tarea tarea={tarea} />)
         )}
       </ul>
-    </Fragment>
+      <button type="button" className="btn btn-eliminar">
+        Eliminar Proyecto &times;
+      </button>
+    </>
   );
 };
 

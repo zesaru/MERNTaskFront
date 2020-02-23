@@ -29,7 +29,7 @@ const NuevoProyecto = () => {
       <button type="button" className="btn btn-block btn-primario">
         Nuevo Proyecto
       </button>
-      <form className="formulario-nuevo-proyecto">
+      <form className="formulario-nuevo-proyecto" onSubmit={onSubmitProyecto}>
         <input
           type="text"
           className="input-text"

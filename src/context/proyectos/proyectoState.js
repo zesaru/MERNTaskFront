@@ -5,7 +5,7 @@ import proyectoReducer from "./proyectoReducer";
 
 const ProyectoState = props => {
   const initialState = {
-    nuevoProyecto: false
+    formulario: false
   };
 
   // dispach para ejecutar las acciones

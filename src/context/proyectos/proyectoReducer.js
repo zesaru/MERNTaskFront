@@ -5,7 +5,7 @@ export default (state, action) => {
     case FORMULARIO_PROYECTO:
       return {
         ...state,
-        formulario: false
+        formulario: true
       };
     case OBTENER_PROYECTOS:
       return {

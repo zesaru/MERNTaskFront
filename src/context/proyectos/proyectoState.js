@@ -14,13 +14,13 @@ const ProyectoState = props => {
 
   const initialState = {
     proyectos: [],
-    formulario: true
+    formulario: false
   };
 
-  // dispach para ejecutar las acciones
+  // Dispatch para ejecutar las acciones
   const [state, dispatch] = useReducer(proyectoReducer, initialState);
 
-  // serie de funciones crud
+  // Serie de funciones para el CRUD
   const mostrarFormulario = () => {
     dispatch({
       type: FORMULARIO_PROYECTO
@@ -34,6 +34,7 @@ const ProyectoState = props => {
       payload: proyectos
     });
   };
+
   return (
     <proyectoContext.Provider
       value={{

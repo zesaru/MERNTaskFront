@@ -9,8 +9,6 @@ const FormTarea = () => {
   // Si no hay proyectado seleccionado
   if (!proyecto) return null;
 
-  // Array destructuring para extraer el proyecto actual
-  const [proyectoActual] = proyecto;
   return (
     <div className="formulario">
       <form>

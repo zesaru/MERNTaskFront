@@ -9,7 +9,7 @@ const Proyecto = ({ proyecto }) => {
 
   //obtener la funcion del contex de tarea
   const tareasContext = useContext(tareaContext);
-  const { obtenerTareas } = tareaContext();
+  const { obtenerTareas } = tareasContext;
   //Funcion para agregar el proyecto actual
   const seleccionarProyecto = id => {
     proyectoActual(id); // Fijar proyecto actual

@@ -3,6 +3,7 @@ import TareaContext from "./tareaContext";
 import TareaReducer from "./tareaReducer";
 
 import { TAREAS_PROYECTO } from "../../types";
+
 const TareaState = props => {
   const initialState = {
     tareas: [
@@ -19,7 +20,8 @@ const TareaState = props => {
       { nombre: "Elegir Plataforma", estado: true, proyectoId: 3 },
       { nombre: "Elegir Colores", estado: false, proyectoId: 4 },
       { nombre: "Elegir Plataformas de pago", estado: false, proyectoId: 3 }
-    ]
+    ],
+    tareasproyecto: null
   };
 
   //Crear dispatch y state
@@ -35,7 +37,13 @@ const TareaState = props => {
     });
   };
   return (
-    <TareaContext.Provider value={{ tareas: state.tareas, obtenerTareas }}>
+    <TareaContext.Provider
+      value={{
+        tareas: state.tareas,
+        tareasproyecto: state.tareasproyecto,
+        obtenerTareas
+      }}
+    >
       {props.children}
     </TareaContext.Provider>
   );

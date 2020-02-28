@@ -22,9 +22,20 @@ const FormTarea = () => {
   // Si no hay proyectado seleccionado
   if (!proyecto) return null;
 
+  const onSubmit = e => {
+    e.preventDefault();
+    //validar
+
+    //pasar por la validacion
+
+    //agregar la nueva tarea al state  tareas
+
+    //reiniciar el form
+  };
+
   return (
     <div className="formulario">
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="contenedor-input">
           <input
             type="text"

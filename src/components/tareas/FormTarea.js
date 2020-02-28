@@ -22,13 +22,25 @@ const FormTarea = () => {
   // Si no hay proyectado seleccionado
   if (!proyecto) return null;
 
+  // arrat destructuring para extraer el proyectoactual
+  const [proyectoActual] = proyecto;
+
+  const handleChange = e => {
+    guardarTarea({
+      ...tarea,
+      [e.target.name]: e.target.value
+    });
+  };
   const onSubmit = e => {
     e.preventDefault();
     //validar
 
     //pasar por la validacion
 
-    //agregar la nueva tarea al state  tareas
+    // agregar la nueva tarea al state de tareas
+    tarea.proyectoId = proyectoActual.id;
+    tarea.estado = false;
+    agregarTarea(tarea);
 
     //reiniciar el form
   };
@@ -42,6 +54,8 @@ const FormTarea = () => {
             className="input-text"
             placeholder="Nombre Tarea..."
             name="nombre"
+            value={nombre}
+            onChange={handleChange}
           />
         </div>
 

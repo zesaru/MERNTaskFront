@@ -20,6 +20,7 @@ const AlertaState = props => {
         categoria
       }
     });
+    // Después de 5 segundos limpiar la alerta
 
     setTimeout(() => {
       dispatch({

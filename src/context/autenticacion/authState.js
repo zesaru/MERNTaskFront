@@ -1,6 +1,8 @@
 import React, { useReducer } from "react";
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
+
+import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/token";
 
 import {
@@ -12,8 +14,6 @@ import {
   CERRAR_SESION
 } from "../../types";
 
-import clienteAxios from "../../config/axios";
-
 const AuthState = props => {
   const initialState = {
     token: localStorage.getItem("token"),
@@ -24,7 +24,6 @@ const AuthState = props => {
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  // Las funciones
   const registrarUsuario = async datos => {
     try {
       const respuesta = await clienteAxios.post("/api/usuarios", datos);
@@ -34,6 +33,7 @@ const AuthState = props => {
         type: REGISTRO_EXITOSO,
         payload: respuesta.data
       });
+
       // Obtener el usuario
       usuarioAutenticado();
     } catch (error) {
@@ -42,17 +42,18 @@ const AuthState = props => {
         msg: error.response.data.msg,
         categoria: "alerta-error"
       };
+
       dispatch({
         type: REGISTRO_ERROR,
         payload: alerta
       });
     }
   };
+
   // Retorna el usuario autenticado
   const usuarioAutenticado = async () => {
     const token = localStorage.getItem("token");
     if (token) {
-      // TODO: Función para enviar el token por headers
       tokenAuth(token);
     }
 
@@ -65,12 +66,31 @@ const AuthState = props => {
       });
     } catch (error) {
       console.log(error.response);
-
       dispatch({
         type: LOGIN_ERROR
       });
     }
   };
+
+  // Cuando el usuario inicia sesión
+  const iniciarSesion = async datos => {
+    try {
+      const respuesta = await clienteAxios.post("/api/auth", datos);
+      console.log(respuesta);
+    } catch (error) {
+      console.log(error.response.data.msg);
+      const alerta = {
+        msg: error.response.data.msg,
+        categoria: "alerta-error"
+      };
+
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: alerta
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -78,7 +98,8 @@ const AuthState = props => {
         autenticado: state.autenticado,
         usuario: state.usuario,
         mensaje: state.mensaje,
-        registrarUsuario
+        registrarUsuario,
+        iniciarSesion
       }}
     >
       {props.children}

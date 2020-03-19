@@ -75,22 +75,19 @@ const TareaState = props => {
         console.log(error)
     }
 
-  // Edita o modifica una tarea
-  const actualizarTarea = async tarea => {
-    try {
-      const resultado = await clienteAxios.put(
-        `/api/tareas/${tarea._id}`,
-        tarea
-      );
+    // Edita o modifica una tarea
+    const actualizarTarea = async tarea => {
 
-      dispatch({
-        type: ACTUALIZAR_TAREA,
-        payload: resultado.data.tarea
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      try {
+          const resultado = await clienteAxios.put(`/api/tareas/${tarea._id}`, tarea);
+
+          dispatch({
+              type: ACTUALIZAR_TAREA,
+              payload: resultado.data.tarea
+          })
+      } catch (error) {
+          console.log(error);
+      }
 
   // Extrae una tarea para edición
   const guardarTareaActual = tarea => {

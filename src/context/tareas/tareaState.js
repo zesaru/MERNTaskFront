@@ -9,8 +9,7 @@ import {
   ELIMINAR_TAREA,
   TAREA_ACTUAL,
   ACTUALIZAR_TAREA,
-  LIMPIAR_TAREA,
-  AGREGAR_TAREA
+  LIMPIAR_TAREA
 } from "../../types";
 
 import clienteAxios from "../../config/axios";
@@ -29,10 +28,13 @@ const TareaState = props => {
 
   // Obtener las tareas de un proyecto
   const obtenerTareas = async proyecto => {
+    console.log(proyecto);
+
     try {
       const resultado = await clienteAxios.get("/api/tareas", {
         params: { proyecto }
       });
+      console.log(resultado);
       dispatch({
         type: TAREAS_PROYECTO,
         payload: resultado.data.tareas
@@ -47,6 +49,7 @@ const TareaState = props => {
     console.log(tarea);
     try {
       const resultado = await clienteAxios.post("/api/tareas", tarea);
+      console.log(resultado);
       dispatch({
         type: AGREGAR_TAREA,
         payload: tarea
@@ -66,28 +69,32 @@ const TareaState = props => {
   // Eliminar tarea por id
   const eliminarTarea = async (id, proyecto) => {
     try {
-        await clienteAxios.delete(`/api/tareas/${id}`, { params: { proyecto }});
-        dispatch({
-            type: ELIMINAR_TAREA,
-            payload: id
-        })
+      await clienteAxios.delete(`/api/tareas/${id}`, { params: { proyecto } });
+      dispatch({
+        type: ELIMINAR_TAREA,
+        payload: id
+      });
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
+  };
 
-    // Edita o modifica una tarea
-    const actualizarTarea = async tarea => {
+  // Edita o modifica una tarea
+  const actualizarTarea = async tarea => {
+    try {
+      const resultado = await clienteAxios.put(
+        `/api/tareas/${tarea._id}`,
+        tarea
+      );
 
-      try {
-          const resultado = await clienteAxios.put(`/api/tareas/${tarea._id}`, tarea);
-
-          dispatch({
-              type: ACTUALIZAR_TAREA,
-              payload: resultado.data.tarea
-          })
-      } catch (error) {
-          console.log(error);
-      }
+      dispatch({
+        type: ACTUALIZAR_TAREA,
+        payload: resultado.data.tarea
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Extrae una tarea para edición
   const guardarTareaActual = tarea => {
